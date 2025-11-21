@@ -79,7 +79,7 @@ app.use(cors());
 app.use(express.json());
 
 app.post("/mcp", async (req, res) => {
-  const response = await server.request(req.body);
+  const response = await server.handleMessage(req.body);
   res.json(response);
 });
 
