@@ -79,9 +79,14 @@ app.use(cors());
 app.use(express.json());
 
 app.post("/mcp", async (req, res) => {
-  const response = await server.handleMessage(req.body);
-  res.json(response);
+  try {
+    const response = await server.handleMessage(req.body);
+    res.json(response);
+  } catch (err) {
+    res.status(500).json({ error: `${err}` });
+  }
 });
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`🚀 MCP server running on port ${PORT}`));
